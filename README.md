@@ -1,25 +1,33 @@
-## Need to do
+# ## Need to do
 
-[x] Basic Set up
-[x] Home page
-[x] Navigation
-[x] Shop
-[x] SignIN/Out
-[x] Sass
+**[x] Basic Set up**
 
-[x] Basic Setup of Firebase Authentication
-[x] Email password login
-[x] Google Log in
+- [x] Home page
+- [x] Navigation
+- [x] Shop
+- [x] SignIN/Out
+- [x] Sass
 
-[ ] Cart Functionality
-[x] Basic component
-[x] Cart Items
-[x] Add Item
-[x] Remove Item
-[x] Clear From Cart
-[x] Update Prices
-[x] Total
+**[x] Basic Setup of Firebase Authentication**
 
-[] FirebaseDB SetUp - dynamic calls to DB
+- [x] Email password login
+- [x] Google Log in
 
-[] Stripe
+**[x] Cart Functionality**
+
+- [x] Basic component
+- [x] Cart Items
+- [x] Add Item
+- [x] Remove Item
+- [x] Clear From Cart
+- [x] Update Prices
+- [x] Total
+
+**[] FirebaseDB SetUp - NoSQL**
+
+- [] add data JS file
+- [] remove hardcoded JSON data
+
+**[] Payment SetUp (Fake)**
+
+- [] Stripe
