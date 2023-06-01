@@ -10,9 +10,15 @@
 	top: 90px;
 	right: 40px;
 	z-index: 5;
-  
+
 	::-webkit-scrollbar {
-		display: none;
+		background: white;
+		width: 7px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: darkgray;
+		border-radius: 5px;
 	}
 
 	.empty-message {
