@@ -1,11 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 
-import {
-	addCollectionAndDocuments,
-	getCategoriesAndDocuments,
-} from '../utils/firebase/firebase.utils';
-
-import SHOP_DATA from '../shop-data';
+import { getCategoriesAndDocuments } from '../utils/firebase/firebase.utils';
 
 // context is the actual value that needs to be accessed
 export const CategoriesContext = createContext({
