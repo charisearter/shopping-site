@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 import {
 	signInWithGooglePopup,
-	createUserDocumentFromAuth,
 	signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
 
-import './sign-in-form.styles.scss';
+import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 
 // shape of form field defaults
 const defaultFormFields = {
@@ -18,7 +17,6 @@ const defaultFormFields = {
 
 function SignInForm() {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	// deconstruct
 	const { email, password } = formFields;
 
 	const resetFormFields = () => {
@@ -33,11 +31,7 @@ function SignInForm() {
 		e.preventDefault();
 
 		try {
-			const { user } = await signInAuthUserWithEmailAndPassword(
-				email,
-				password
-			);
-
+			await signInAuthUserWithEmailAndPassword(email, password);
 			resetFormFields();
 		} catch (error) {
 			console.log(error);
@@ -51,7 +45,7 @@ function SignInForm() {
 					break;
 
 				default:
-					console.log(error);
+					console.log('User sign in failed', error);
 					break;
 			}
 		}
@@ -64,7 +58,7 @@ function SignInForm() {
 	};
 
 	return (
-		<div className='sign-in-container'>
+		<SignInContainer>
 			<h2>Already have an account?</h2>
 			<span>Sign in with your email and password</span>
 			<form onSubmit={handleSubmit}>
@@ -86,14 +80,18 @@ function SignInForm() {
 					value={password}
 				/>
 
-				<div className='buttons-container'>
+				<ButtonsContainer>
 					<Button type='submit'>Sign In</Button>
-					<Button buttonType='google' type='button' onClick={signInWithGoogle}>
-						Google sign In
+					<Button
+						buttonType={BUTTON_TYPE_CLASSES.google}
+						type='button'
+						onClick={signInWithGoogle}
+					>
+						Sign In With Google
 					</Button>
-				</div>
+				</ButtonsContainer>
 			</form>
-		</div>
+		</SignInContainer>
 	);
 }
 
