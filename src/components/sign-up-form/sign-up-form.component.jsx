@@ -6,7 +6,7 @@ import {
 	createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils';
 
-import './sign-up-form.styles.scss';
+import { SignUpContainer } from './sign-up-form.styles';
 
 // shape of form field defaults
 const defaultFormFields = {
@@ -18,7 +18,6 @@ const defaultFormFields = {
 
 function SignUpForm() {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	// deconstruct
 	const { displayName, email, password, confirmPassword } = formFields;
 
 	const resetFormFields = () => {
@@ -28,7 +27,6 @@ function SignUpForm() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// confirm password fields match
 		if (password !== confirmPassword) {
 			alert('Passwords do not match');
 			return;
@@ -41,17 +39,14 @@ function SignUpForm() {
 			);
 
 			await createUserDocumentFromAuth(user, { displayName });
-
 			resetFormFields();
 		} catch (error) {
 			if (error.code === 'auth/email-already-in-use') {
-				alert('Cannot create user. Email is already in use.');
+				alert('Cannot create user. Email already in use.');
 			} else {
 				console.log('User creation encountered an error', error);
 			}
 		}
-
-		// create a user document with what this returns
 	};
 
 	const handleChange = (e) => {
@@ -61,7 +56,7 @@ function SignUpForm() {
 	};
 
 	return (
-		<div className='sign-up-container'>
+		<SignUpContainer>
 			<h2>Don't have an account?</h2>
 			<span>Sign up with your email and password</span>
 			<form onSubmit={handleSubmit}>
@@ -102,7 +97,7 @@ function SignUpForm() {
 				/>
 				<Button type='submit'>Sign Up</Button>
 			</form>
-		</div>
+		</SignUpContainer>
 	);
 }
 
