@@ -23,11 +23,11 @@
 - [x] Update Prices
 - [x] Total
 
-**[] FirebaseDB SetUp - NoSQL**
+**[x] FirebaseDB SetUp - NoSQL**
 
-- [] add data JS file
-- [] remove hardcoded JSON data
+- [x] add data JS file
+- [x] pull from Firebase db
 
-**[] Payment SetUp (Fake)**
+**[x] Styled Components**
 
-- [] Stripe
+- [x] Replace Sass with Styled-Components to avoid style clash
