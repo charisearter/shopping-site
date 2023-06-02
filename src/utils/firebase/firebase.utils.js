@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
+	signInWithRedirect,
 	signInWithPopup,
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
@@ -8,7 +9,6 @@ import {
 	signOut,
 	onAuthStateChanged,
 } from 'firebase/auth';
-
 import {
 	getFirestore,
 	doc,
@@ -18,10 +18,8 @@ import {
 	writeBatch,
 	query,
 	getDocs,
-	DocumentSnapshot,
 } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
 	apiKey: 'AIzaSyCK2AUJmS5ijAITo5sxfYt-yOaJThTr66I',
 	authDomain: 'shop-db-9c9e7.firebaseapp.com',
@@ -31,7 +29,6 @@ const firebaseConfig = {
 	appId: '1:986022509565:web:6804b1cedcfb5aed057794',
 };
 
-// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -41,15 +38,17 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-
 export const signInWithGooglePopup = () =>
 	signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+	signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (
 	collectionKey,
-	objectsToAdd
+	objectsToAdd,
+	field
 ) => {
 	const collectionRef = collection(db, collectionKey);
 	const batch = writeBatch(db);
@@ -60,7 +59,7 @@ export const addCollectionAndDocuments = async (
 	});
 
 	await batch.commit();
-	console.log('DONE - BATCH CREATED!');
+	console.log('done');
 };
 
 export const getCategoriesAndDocuments = async () => {
@@ -82,12 +81,11 @@ export const createUserDocumentFromAuth = async (
 	additionalInformation = {}
 ) => {
 	if (!userAuth) return;
-	// get user Doc info
+
 	const userDocRef = doc(db, 'users', userAuth.uid);
 
 	const userSnapshot = await getDoc(userDocRef);
 
-	// check if user snapshot exists, if not try to create it
 	if (!userSnapshot.exists()) {
 		const { displayName, email } = userAuth;
 		const createdAt = new Date();
@@ -100,7 +98,7 @@ export const createUserDocumentFromAuth = async (
 				...additionalInformation,
 			});
 		} catch (error) {
-			console.log('Error creating the user', error.message);
+			console.log('error creating the user', error.message);
 		}
 	}
 
