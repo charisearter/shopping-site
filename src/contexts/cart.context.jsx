@@ -5,7 +5,6 @@ export const addCartItem = (cartItems, productToAdd) => {
 		(cartItem) => cartItem.id === productToAdd.id
 	);
 
-	// If yes, increment quantity
 	if (existingCartItem) {
 		return cartItems.map((cartItem) =>
 			cartItem.id === productToAdd.id
@@ -22,13 +21,12 @@ export const removeCartItem = (cartItems, cartItemToRemove) => {
 		(cartItem) => cartItem.id === cartItemToRemove.id
 	);
 
-	// if quantity is 0, remove from cartItems
-
+	// if quantity is 1, remove from cartItems
 	if (existingCartItem.quantity === 1) {
 		return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 	}
 
-	// if yes decrement quantity
+	// return the cartItems with matching cart item with reduced quantity
 	if (existingCartItem) {
 		return cartItems.map((cartItem) =>
 			cartItem.id === cartItemToRemove.id
